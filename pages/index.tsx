@@ -1,32 +1,13 @@
 import Head from "next/head"
-import { Rubik } from "@next/font/google"
-import { SubmitHandler, useForm } from "react-hook-form"
 import { useState } from "react"
+import { Rubik } from "@next/font/google"
+import Result from "../components/Result"
+import Form from "../components/Form"
+
 const rubik = Rubik({ subsets: ["latin"] })
 
 export default function Home() {
   const [code, setCode] = useState("")
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<Inputs>()
-
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    console.log(data)
-    const response = await fetch("/api/cipher", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-
-    const code = await response.json()
-    setCode(code.codedStr)
-    reset()
-  }
 
   return (
     <>
@@ -37,69 +18,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={rubik.className}>
-        <div className="container">
-          <h1 className="flex uppercase text-xl justify-center">
-            Caesar Cipher
-          </h1>
-          <div>
-            {code}  
-          </div>
-          <div className=" flex flex-row justify-center items-center h-screen ">
-            <form
-              className="flex flex-col w-screen items-center"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <label htmlFor="str" className="uppercase">
-                Secret
-              </label>
-              <input
-                id="str"
-                placeholder="your secret string"
-                {...register("str", { required: true })}
-                type="text"
-                className="p-3 border-4 border-indigo-500 text-indigo-900 w-6/12 
-                rounded-3xl active:bg-slate-200 focus:bg-indigo-100 focus:w-full 
-                outline-none transition-all text-center text-lg overflow-ellipsis"
-              />
-
-              {errors.str && (
-                <span className=" text-red-600 text-xs ">
-                  This field is required
-                </span>
-              )}
-              <label htmlFor="cipher" className="uppercase mt-6">
-                Cipher
-              </label>
-              <input
-                id="cipher"
-                placeholder="cipher number"
-                {...register("cipher", { required: true })}
-                type="number"
-                className="p-3 border-4 border-indigo-500 text-indigo-900 w-6/12 
-                rounded-3xl active:bg-slate-200 focus:bg-indigo-100 focus:w-full 
-                outline-none transition-all text-center text-lg overflow-ellipsis"
-              />
-              {errors.cipher && (
-                <span className=" text-red-600 text-xs">
-                  Cipher is required and must be a number!
-                </span>
-              )}
-
-              <button
-                className="p-3 border-4 rounded-3xl mt-12 border-indigo-500 w-6/12
-              hover:shadow-2xl hover:bg-indigo-600 outline-none focus:border-indigo-300"
-              >
-                Code it!
-              </button>
-            </form>
-          </div>
+        <div className="container flex flex-col justify-center items-center h-screen">
+          <h1 className="uppercase text-3xl mb-8">Caesar Cipher</h1>
+          {code && <Result code={code} setCode={setCode} />}
+          <Form setCode={setCode} />
         </div>
       </main>
     </>
   )
-}
-
-type Inputs = {
-  str: string
-  cipher: number
 }
