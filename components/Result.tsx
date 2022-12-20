@@ -1,9 +1,24 @@
 import { Tooltip } from "@material-tailwind/react"
+import { useTheme } from "next-themes"
+import { toast } from "react-toastify"
 import { TCodeProps } from "../type/types"
 
 export default function Result({ code, setCode }: TCodeProps) {
+  const { theme } = useTheme()
+  const themeMode = theme === "dark" ? "dark" : "light"
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
+    toast("🦄 Copied to clipboard.", {
+      position: "bottom-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: themeMode
+    })
   }
 
   return (
@@ -17,14 +32,15 @@ export default function Result({ code, setCode }: TCodeProps) {
       >
         <div
           onClick={() => copyToClipboard(code || "")}
-          className="w-6/12 hover:w-full transition-all p-4 border-indigo-500 border-2 border-dashed rounded-3xl
-          hover:bg-indigo-400 hover:cursor-pointer"
+          className="w-6/12 rounded-3xl border-4 border-dashed border-indigo-500 p-4 transition-all
+          hover:w-full hover:cursor-pointer hover:bg-indigo-400 dark:border-gray-500 dark:hover:bg-gray-400"
         >
           <span>{code}</span>
         </div>
       </Tooltip>
       <button
-        className="border-indigo-500 hover:bg-red-400 transition-all border-r-2 border-l-2 border-b-2 border-dashed p-1 pl-2 pr-2 rounded mb-8"
+        className="mb-8 rounded border-r-4 border-l-4 border-b-4 border-dashed border-indigo-500 p-2
+        transition-all hover:bg-red-400 dark:border-gray-500"
         onClick={() => setCode("")}
       >
         CLEAR

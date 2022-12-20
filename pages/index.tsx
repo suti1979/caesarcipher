@@ -3,7 +3,8 @@ import { useState } from "react"
 import { Rubik } from "@next/font/google"
 import Result from "../components/Result"
 import Form from "../components/Form"
-
+import RenderThemeChanger from "../customHooks/renderThemeChanger"
+import { ToastContainer } from "react-toastify"
 const rubik = Rubik({ subsets: ["latin"] })
 
 export default function Home() {
@@ -18,11 +19,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={rubik.className}>
-        <div className="container flex flex-col justify-center items-center h-screen">
-          <h1 className="uppercase text-3xl mb-8">Caesar Cipher</h1>
+        <div className="container flex h-screen flex-col items-center justify-center">
+          <h1 className="mb-8 text-3xl uppercase">Caesar Cipher</h1>
           {code && <Result code={code} setCode={setCode} />}
           <Form setCode={setCode} />
+          <div className=" mt-8 cursor-pointer transition-all hover:scale-125">
+            {RenderThemeChanger && RenderThemeChanger()}
+          </div>
         </div>
+        <ToastContainer/>
       </main>
     </>
   )

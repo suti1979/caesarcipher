@@ -19,7 +19,7 @@ export default function Form({ setCode }: TCodeProps) {
 
   return (
     <form
-      className="flex flex-col w-full items-center "
+      className="flex w-full flex-col items-center "
       onSubmit={handleSubmit(onSubmit)}
     >
       <label htmlFor="str" className="uppercase">
@@ -30,15 +30,18 @@ export default function Form({ setCode }: TCodeProps) {
         placeholder="your secret thing"
         {...register("str", { required: true })}
         type="text"
-        className="p-3 border-4 border-indigo-500 text-indigo-900 w-6/12 
-                rounded-3xl active:bg-indigo-100 focus:bg-indigo-100 focus:w-full 
-                outline-none transition-all text-center text-lg overflow-ellipsis"
+        className="w-6/12 overflow-ellipsis rounded-3xl border-4 border-indigo-500 bg-indigo-900 
+                   p-3 text-center text-lg text-yellow-50 outline-none transition-all
+                   focus:w-full focus:bg-indigo-800 active:bg-indigo-800
+                 dark:border-gray-500 dark:bg-gray-300 dark:text-gray-800"
       />
 
       {errors.str && (
-        <span className=" text-red-400 text-sm ">This field is required!</span>
+        <span className=" pt-1 text-sm text-red-500 ">
+          This field is required!
+        </span>
       )}
-      <label htmlFor="cipher" className="uppercase mt-6">
+      <label htmlFor="cipher" className="mt-6 uppercase">
         Cipher
       </label>
       <input
@@ -46,19 +49,21 @@ export default function Form({ setCode }: TCodeProps) {
         placeholder="cipher number"
         {...register("cipher", { required: true, min: -1000, max: 1000 })}
         type="number"
-        className="p-3 border-4 border-indigo-500 text-indigo-900 w-6/12 
-                rounded-3xl active:bg-indigo-100 focus:bg-indigo-100 focus:w-full 
-                outline-none transition-all text-center text-lg overflow-ellipsis"
+        className="w-6/12 overflow-ellipsis rounded-3xl border-4 border-indigo-500 bg-indigo-900 
+                   p-3 text-center text-lg text-yellow-50 outline-none transition-all
+                   focus:w-full focus:bg-indigo-800 active:bg-indigo-800
+                 dark:border-gray-500 dark:bg-gray-300 dark:text-gray-800"
       />
       {errors.cipher && (
-        <span className=" text-red-400 text-sm ">
+        <span className=" text-sm text-red-400 ">
           Cipher is required and must be a number! between -1000 and 1000)
         </span>
       )}
 
       <button
-        className="p-3 border-4 rounded-3xl mt-12 border-indigo-500 w-6/12
-              hover:shadow-2xl hover:bg-indigo-600 outline-none focus:border-indigo-300"
+        className="mt-12 w-6/12 rounded-3xl border-4 border-indigo-500 p-3 outline-none
+                 hover:bg-indigo-800 hover:shadow-2xl focus:border-indigo-300
+                 dark:border-gray-500 dark:hover:bg-gray-400"
       >
         Code it!
       </button>

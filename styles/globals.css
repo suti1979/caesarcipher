@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --toastify-color-light: #3730a3;
+  --toastify-color-dark: #a1a1aa;
+
+  --toastify-text-color-light: #a1a1aa;
+  --toastify-text-color-dark: #3730a3;
+
+  --toastify-color-progress-light: linear-gradient(to right, #3730a3, indigo);
+
+  --toastify-color-progress-dark: linear-gradient(to right, #a1a1aa, gray);
+}
