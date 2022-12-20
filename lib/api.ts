@@ -1,6 +1,6 @@
 import { Inputs } from "../type/types"
 
-export const apiCall = async (data:Inputs) => {
+export const apiCall = async (data: Inputs) => {
   const response = await fetch("/api/cipher", {
     method: "POST",
     headers: {
@@ -10,6 +10,5 @@ export const apiCall = async (data:Inputs) => {
   })
 
   const code = await response.json()
-
   return code.codedStr
 }
