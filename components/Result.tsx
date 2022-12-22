@@ -1,6 +1,7 @@
 import { Tooltip } from "@material-tailwind/react"
 import { toast } from "react-toastify"
 import { TCodeProps } from "../type/types"
+import { DeleteBin } from "../assets/icons"
 
 export default function Result({ code, setCode }: TCodeProps) {
   const copyToClipboard = (text: string) => {
@@ -25,13 +26,22 @@ export default function Result({ code, setCode }: TCodeProps) {
           <span>{code}</span>
         </div>
       </Tooltip>
-      <button
-        className="mb-8 rounded border-r-4 border-l-4 border-b-4 border-dashed border-indigo-500 p-2
-        transition-all hover:bg-red-400 dark:border-gray-500"
-        onClick={() => setCode("")}
+      <Tooltip
+        placement="bottom"
+        content="DELETE"
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0, y: 25 },
+        }}
       >
-        CLEAR
-      </button>
+        <button
+          className="mb-8 flex items-center rounded border-r-4 border-l-4 border-b-4 border-dashed 
+        border-indigo-500 p-4 transition-all  dark:border-gray-500"
+          onClick={() => setCode("")}
+        >
+          <DeleteBin />
+        </button>
+      </Tooltip>
     </>
   )
 }
