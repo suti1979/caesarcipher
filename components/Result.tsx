@@ -20,7 +20,7 @@ export default function Result({ code, setCode }: TCodeProps) {
       >
         <div
           onClick={() => copyToClipboard(code || "")}
-          className="w-4/5 rounded-3xl border-4 border-dashed border-indigo-500 p-4 transition-all
+          className="w-4/5 rounded-3xl border-4 border-dashed border-indigo-500 p-4 text-center font-bold  transition-all
           hover:w-full hover:cursor-pointer hover:bg-indigo-400 dark:border-gray-500 dark:hover:bg-gray-400"
         >
           <span>{code}</span>
